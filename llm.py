@@ -16,7 +16,7 @@ The following is a diff of the changes made in this commit:
 
 <type>[optional scope]: <short summary>
 [optional body]
-[optional footer(s)]
+
 
 **Commit Types:**
 
@@ -45,16 +45,10 @@ The following is a diff of the changes made in this commit:
    - Wrap text at 72 characters.
    - Explain the "what" and "why" of the changes.
 
-3. **Footer:**
-    - Use for issue references (e.g., "Closes #123" or "Closes JIRA-123").
-    - Include co-author information if necessary.
-
 **Example:**
 
 fix(auth): resolve login failure issue
 This commit fixes the login failure issue that was occurring due to incorrect password hashing. The hashing algorithm has been updated to bcrypt.
-Closes #456
-Co-authored-by: Jiwon Choi <devjiwonchoi@gmail.com>
 
 **Generate a commit message following these guidelines.**
 """
