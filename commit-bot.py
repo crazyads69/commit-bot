@@ -41,6 +41,13 @@ def main():
             subprocess.run(
                 ["git", "commit", "-m", commit_title, "-m", commit_body], check=True
             )
+            # Check the current branch
+            branch = subprocess.check_output(
+                ["git", "rev-parse", "--abbrev-ref", "HEAD"], text=True
+            ).strip()
+
+            # Push the commit to the remote repository
+            subprocess.run(["git", "push", "-u", "origin", branch], check=True)
 
             # Grab the commit hash of the last commit
             commit_hash = subprocess.check_output(
