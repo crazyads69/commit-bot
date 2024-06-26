@@ -37,9 +37,9 @@ def main():
             committer = subprocess.check_output(
                 ["git", "var", "GIT_COMMITTER_IDENT"], text=True
             )
-            print(f"Committer: {committer}")
+            # print(f"Committer: {committer}")
 
-            commit_body = f"{commit_body}\n\nCommitted by: {committer}"
+            # commit_body = f"{commit_body}\n\nCommitted by: {committer}"
             # Stage all changes
             subprocess.run(["git", "add", "."], check=True)
 
