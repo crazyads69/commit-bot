@@ -16,7 +16,7 @@ The following is a diff of the changes made in this commit:
 
 <type>[optional scope]: <short summary>
 [optional body]
-
+[optional footer(s)]
 
 **Commit Types:**
 
@@ -36,7 +36,7 @@ The following is a diff of the changes made in this commit:
 
 1. **Subject Line:**
    - Use imperative mood (e.g., "Add", "Fix", "Update").
-   - Keep it concise (50 characters or less).
+   - Keep it concise (maximum 50 characters or less).
    - Capitalize the first letter.
    - Do not end with a period.
 
@@ -45,10 +45,16 @@ The following is a diff of the changes made in this commit:
    - Wrap text at 72 characters.
    - Explain the "what" and "why" of the changes.
 
+3. **Footer:**
+   - Include author information as follows:
+     Authored-by: Jiwon Choi <devjiwonchoi@gmail.com>
+
 **Example:**
 
 fix(auth): resolve login failure issue
 This commit fixes the login failure issue that was occurring due to incorrect password hashing. The hashing algorithm has been updated to bcrypt.
+
+Authored-by: Jiwon Choi <devjiwonchoi@gmail.com>
 
 **Generate a commit message following these guidelines.**
 """

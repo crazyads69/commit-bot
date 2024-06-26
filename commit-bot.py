@@ -46,16 +46,8 @@ def main():
             commit_title = commit_message.split("\n")[0]
             # Use the leftover commit message as the commit body
             commit_body = "\n".join(commit_message.split("\n")[1:])
-            # get the git committer ident
-            committer = subprocess.check_output(
-                ["git", "var", "GIT_COMMITTER_IDENT"], text=True
-            )
-            print(f"Committer: {committer}")
-
-            commit_body = f"{commit_body}\n\nCommitted by: {committer}"
             # Stage all changes
             subprocess.run(["git", "add", "."], check=True)
-
             # Run the git commit command with the commit title and body
             subprocess.run(
                 ["git", "commit", "-m", commit_title, "-m", commit_body], check=True
