@@ -11,7 +11,7 @@
 Ensure you have all the necessary dependencies by installing them from `requirements.txt`:
 
 ```sh
-pip install -r requirements.txt
+    pip install -r requirements.txt
 ```
 
 ### Step 2: Obtain Gemini API Key
@@ -30,7 +30,7 @@ You will need an API key from Gemini Studio. Follow the steps below to set up yo
 Run the build.py script and wait for a success message indicating the installation is complete:
 
 ```sh
-python build.py
+    python build.py
 ```
 
 ## Usage
@@ -38,7 +38,7 @@ python build.py
 To use the commit-bot, navigate to the project directory where you want to commit changes and run the following command:
 
 ```sh
-commit-bot
+    commit-bot
 ```
 
 The commit-bot will:
