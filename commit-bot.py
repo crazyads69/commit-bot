@@ -11,7 +11,6 @@ import subprocess
 def main():
     # Progress bar
     click.echo("Generating commit message...")
-
     # Load env
     dotenv.load_dotenv()
 
@@ -21,14 +20,28 @@ def main():
         raise ValueError("GEMINI_API_KEY not found in environment variables.")
 
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    model = genai.GenerativeModel(
+        "gemini-1.5-flash",
+        safety_settings={
+            "HARASSMENT": "block_none",
+            "HATE_SPEECH": "block_none",
+            "SEXUALLY_EXPLICIT": "block_none",
+        },
+        generation_config=genai.types.GenerationConfig(
+            # Only one candidate for now.
+            max_output_tokens=8192,
+            temperature=0.6,
+            top_p=0.8,
+        ),
+    )
 
     # Get the diff of the current changes
     diff = git_diff()
     if diff:
         commit_message = generate_commit_message(diff, model)
-
         if commit_message:
+            # Remove the ``` from the commit message``` to avoid issues with the git commit command
+            commit_message = commit_message.replace("```", "")
             # Grab the first line of the commit message to use as the commit title
             commit_title = commit_message.split("\n")[0]
             # Use the leftover commit message as the commit body
@@ -37,9 +50,9 @@ def main():
             committer = subprocess.check_output(
                 ["git", "var", "GIT_COMMITTER_IDENT"], text=True
             )
-            # print(f"Committer: {committer}")
+            print(f"Committer: {committer}")
 
-            # commit_body = f"{commit_body}\n\nCommitted by: {committer}"
+            commit_body = f"{commit_body}\n\nCommitted by: {committer}"
             # Stage all changes
             subprocess.run(["git", "add", "."], check=True)
 
