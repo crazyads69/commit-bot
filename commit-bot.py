@@ -4,6 +4,7 @@ from llm import generate_commit_message
 import os
 import dotenv
 import google.generativeai as genai
+from google.generativeai.types import HarmCategory, HarmBlockThreshold
 import subprocess
 
 
@@ -23,9 +24,10 @@ def main():
     model = genai.GenerativeModel(
         "gemini-1.5-flash",
         safety_settings={
-            "HARASSMENT": "block_none",
-            "HATE_SPEECH": "block_none",
-            "SEXUALLY_EXPLICIT": "block_none",
+            HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
+            HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
+            HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
+            HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
         },
         generation_config=genai.types.GenerationConfig(
             # Only one candidate for now.
