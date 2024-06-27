@@ -22,7 +22,7 @@ def main():
 
     genai.configure(api_key=api_key)
     model = genai.GenerativeModel(
-        "gemini-1.5-flash",
+        "gemini-1.5-pro-latest",
         safety_settings={
             HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
             HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
@@ -32,8 +32,8 @@ def main():
         generation_config=genai.types.GenerationConfig(
             # Only one candidate for now.
             max_output_tokens=8192,
-            temperature=0.6,
-            top_p=0.8,
+            temperature=0.7,
+            top_p=1.0,
         ),
     )
 

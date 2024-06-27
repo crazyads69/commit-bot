@@ -19,7 +19,8 @@ Ensure you have all the necessary dependencies by installing them from `requirem
 You will need an API key from Gemini Studio. Follow the steps below to set up your API key:
 
 1. Obtain your Gemini API Key from Gemini Studio.
-2. Update the API Key in `env.py`:
+2. Rename `env_example.py` to `env.py`
+3. Update the API Key in `env.py`:
 
 ```python
     os.environ["GEMINI_API_KEY"] = "YOUR_API_KEY_HERE"
@@ -27,7 +28,7 @@ You will need an API key from Gemini Studio. Follow the steps below to set up yo
 
 ### Step 3: Build the Project
 
-Run the build.py script and wait for a success message indicating the installation is complete:
+Run the build.py script and wait for a success message indicating the installation is complete. **On Windows, make sure you run the build script with administrator permissions.**
 
 ```sh
     python build.py
