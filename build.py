@@ -6,10 +6,37 @@ import platform
 # Define the build_executable function that builds the commit-bot executable
 def build_executable():
     print("Building commit-bot executable...")
-    subprocess.run(
-        ["pyinstaller", "commit-bot.py", "--onefile", "--runtime-hook", "./env.py"],
-        check=True,
-    )
+    # Check platform if Windows and Linux then use the UPX compression to optimize the executable size
+    if platform.system() != "Darwin":
+        subprocess.run(
+            [
+                "pyinstaller",
+                "commit-bot.py",
+                "--onefile",
+                "--runtime-hook",
+                "./env.py",
+                "--clean",
+                "--strip",
+                "--log-level=WARN",
+                "--upx-dir",
+                "./upx",  # Specify the path to UPX if needed
+            ],
+            check=True,
+        )
+    else:
+        subprocess.run(
+            [
+                "pyinstaller",
+                "commit-bot.py",
+                "--onefile",
+                "--runtime-hook",
+                "./env.py",
+                "--clean",  # Clean PyInstaller cache and remove temporary files before building
+                "--strip",  # Strip the executable to reduce its size
+                "--log-level=WARN",  # Reduce the verbosity of logs
+            ],
+            check=True,
+        )
     print("Commit-bot executable built successfully.")
 
 
