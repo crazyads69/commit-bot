@@ -1,3 +1,4 @@
+from calendar import c
 from diff import git_diff
 import click
 from llm import generate_commit_message
@@ -44,6 +45,40 @@ def main():
         if commit_message:
             # Remove the ``` from the commit message``` to avoid issues with the git commit command
             commit_message = commit_message.replace("```", "")
+            # Remove the ** from the commit message to avoid issues with the git commit command
+            commit_message = commit_message.replace("**", "")
+            # Remove the ` from the commit message to avoid issues with the git commit command
+            commit_message = commit_message.replace("`", "")
+            # Check if first line of commit message is not in format <type>[optional scope]: <short summary>
+            if not commit_message.startswith(
+                (
+                    "feat:",
+                    "fix:",
+                    "chore:",
+                    "refactor:",
+                    "docs:",
+                    "style:",
+                    "test:",
+                    "perf:",
+                    "ci:",
+                    "build:",
+                    "revert:",
+                    "feat(",
+                    "fix(",
+                    "chore(",
+                    "refactor(",
+                    "docs(",
+                    "style(",
+                    "test(",
+                    "perf(",
+                    "ci(",
+                    "build(",
+                    "revert(",
+                )
+            ):
+                click.echo("The commit message does not follow the required format.")
+                click.echo(commit_message)
+                return
             # Grab the first line of the commit message to use as the commit title
             commit_title = commit_message.split("\n")[0]
             # Use the leftover commit message as the commit body
