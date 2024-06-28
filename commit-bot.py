@@ -22,7 +22,11 @@ def generate_and_commit(model):
         if commit_message:
             # Remove unwanted characters from the commit message
             commit_message = (
-                commit_message.replace("```", "").replace("**", "").replace("`", "")
+                commit_message.replace("```", "")
+                .replace("**", "")
+                .replace("`", "")
+                .replace("#", "")
+                .strip()
             )
             # Check if the first line of the commit message is in the required format
             if not commit_message.startswith(
