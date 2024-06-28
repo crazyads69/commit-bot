@@ -117,9 +117,25 @@ def install_on_unix():
     )
 
 
+def remove_excutable():
+    print("Removing commit-bot executable...")
+    if platform.system() == "Windows":
+        subprocess.run(
+            ["del", "commit-bot.exe"],
+            shell=True,
+            check=True,
+        )
+    else:
+        subprocess.run(
+            ["rm", "commit-bot"],
+            check=True,
+        )
+
+
 if __name__ == "__main__":
     build_executable()
     copy_executable()
     change_permissions()
     install_executable()
+    remove_excutable()
     print("Commit-bot executable has been successfully installed.")
