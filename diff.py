@@ -1,3 +1,4 @@
+from re import sub
 import subprocess
 
 
@@ -10,7 +11,11 @@ def git_diff():
     """
     try:
         # Run the git diff command and capture the output
-        diff = subprocess.check_output(["git", "diff"], text=True)
+        # Stage all changes
+        subprocess.run(["git", "add", "."], check=True)
+        diff = subprocess.check_output(["git", "diff", "--staged"], text=True)
+        if diff:
+            print("Changes detected in the working directory.")
         # get the git committer ident
         committer = subprocess.check_output(
             ["git", "var", "GIT_COMMITTER_IDENT"], text=True

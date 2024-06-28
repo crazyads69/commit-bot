@@ -63,8 +63,6 @@ def generate_and_commit(model):
             commit_title = commit_message.split("\n")[0]
             # Use the leftover commit message as the commit body
             commit_body = "\n".join(commit_message.split("\n")[1:])
-            # Stage all changes
-            subprocess.run(["git", "add", "."], check=True)
             # Run the git commit command with the commit title and body
             subprocess.run(
                 ["git", "commit", "-m", commit_title, "-m", commit_body], check=True
