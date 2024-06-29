@@ -26,6 +26,7 @@ def generate_and_commit(model):
                 .replace("**", "")
                 .replace("`", "")
                 .replace("#", "")
+                .replace("*", "")
                 .strip()
             )
             # Check if the first line of the commit message is in the required format
